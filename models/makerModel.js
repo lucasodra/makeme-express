@@ -13,6 +13,7 @@ const makerSchema = new mongoose.Schema({
     roleOf: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
+        required: 'true'
     }
 })
 

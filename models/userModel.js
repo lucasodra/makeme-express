@@ -9,6 +9,11 @@ const userSchema = new mongoose.Schema({
         required: [true, "Please enter email"],
         unique: [true, "Email already exists"]
     },
+    mobile: {
+        type: String,
+        required: [true, "Please enter contact number"],
+        unique: [true, "Contact number was previously registered"]
+    },
     password: {
         type: String,
         required: [true, "Please enter password"],
@@ -39,10 +44,23 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
-    createdAt: {
-        type: Date,
-        default: Date.now,
+    resetPasswordToken: String,
+    resetPasswordExpiry: Date
+});
+
+userSchema.pre("save", async function(next) {
+    console.log("userSchema/pre before");
+    if (this.isModified("password")) {
+        this.password = await bcrypt.hash(this.password, 10);
     }
-})
+    console.log("userSchema/pre after");
+});
+
+userSchema.methods.generateToken = function() {
+    console.log("userSchema/generateToken before after");
+    return jwt.sign( {id: this._id }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRE
+    });
+}
 
 module.exports = mongoose.model("User", userSchema);
