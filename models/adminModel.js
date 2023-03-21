@@ -8,12 +8,7 @@ const adminSchema = new mongoose.Schema({
     isSuper: {
         type: Boolean,
         default: 0
-    },
-    roleOf : {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
     }
 })
 
-module.export = mongoose.model(Admin, adminSchema);
+module.exports = mongoose.model("Admin", adminSchema);

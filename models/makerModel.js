@@ -9,12 +9,7 @@ const makerSchema = new mongoose.Schema({
     },
     totalOrder: {
         type: Number
-    },
-    roleOf: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: 'true'
     }
 })
 
-module.exports = mongoose.model(Maker, makerSchema);
+module.exports = mongoose.model("Maker", makerSchema);

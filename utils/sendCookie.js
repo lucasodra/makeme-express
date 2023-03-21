@@ -1,4 +1,4 @@
-const sendCookie = (user = {}, statusCode, res) => {
+const sendCookie = (user, statusCode, res) => {
     const token = user.generateToken();
 
     const options = {
@@ -10,7 +10,7 @@ const sendCookie = (user = {}, statusCode, res) => {
 
     res.status(statusCode).cookie('token', token, options).json({
         success: true,
-        user,
+        user
     });
 }
 

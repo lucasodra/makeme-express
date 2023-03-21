@@ -18,7 +18,10 @@ app.get('/', (req, res) => {
 });
 
 const user = require('./routes/userRoute');
+const address = require('./routes/addressRoute');
+
 app.use('/api/v1', user);
+app.use('/api/v1', address);
 app.use(errorMiddleware);
 
 module.exports = app;

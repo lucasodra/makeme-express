@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please enter password"],
         minlength: [6, "Password must be of minimum 6 characters"],
-        select: false
+        select: false,
     },
     firstname: {
         type: String,
@@ -43,6 +43,18 @@ const userSchema = new mongoose.Schema({
     isAdmin: {
         type: Boolean,
         required: true
+    },
+    client:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Client'
+    },
+    maker: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Maker'
+    },
+    admin: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Admin'
     },
     resetPasswordToken: String,
     resetPasswordExpiry: Date
