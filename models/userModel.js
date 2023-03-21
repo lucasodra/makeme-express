@@ -49,15 +49,12 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.pre("save", async function(next) {
-    console.log("userSchema/pre before");
     if (this.isModified("password")) {
         this.password = await bcrypt.hash(this.password, 10);
     }
-    console.log("userSchema/pre after");
 });
 
 userSchema.methods.generateToken = function() {
-    console.log("userSchema/generateToken before after");
     return jwt.sign( {id: this._id }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRE
     });

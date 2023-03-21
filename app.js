@@ -5,7 +5,6 @@ const dotenv = require("dotenv")
 const path = require('path');
 
 dotenv.config({path : __dirname+'/config/.env'})
-console.log("app.js before");
 
 const app = express();
 
@@ -22,5 +21,4 @@ const user = require('./routes/userRoute');
 app.use('/api/v1', user);
 app.use(errorMiddleware);
 
-console.log("app.js after");
 module.exports = app;

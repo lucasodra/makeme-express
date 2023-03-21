@@ -5,7 +5,8 @@ const ErrorHandler = require('../utils/errorHandler');
 const crypto = require('crypto');
 
 exports.signupUser = catchAsync(async (req, res, next) => {
-    console.log("userController/signupUser.js before");
+    await new Promise(r => setTimeout(r, 2000));
+
     const { firstname, lastname, email, mobile, password, isMaker, isClient, isAdmin} = req.body;
 
     const user = await User.findOne({
@@ -32,5 +33,4 @@ exports.signupUser = catchAsync(async (req, res, next) => {
     })
 
     sendCookie(newUser, 201, res);
-    console.log("userController/signupUser.js after");
 });

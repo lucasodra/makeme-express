@@ -4,7 +4,6 @@ const ErrorHandler = require('../utils/errorHandler');
 const catchAsync = require('./catchAsync');
 
 exports.isAuthenticated = catchAsync(async (req, res, next) => {
-    console.log("middleware/auth.js before");
     const { token } = req.cookies;
 
     if (!token) {
@@ -14,5 +13,4 @@ exports.isAuthenticated = catchAsync(async (req, res, next) => {
     const decodedData = jwt.verify(token, process.env.JWT_SECRET);
     req.user = await User.findById(decodedData.id);
     next();
-    console.log("middleware/auth.js after");
 });

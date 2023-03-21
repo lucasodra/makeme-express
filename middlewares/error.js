@@ -1,7 +1,6 @@
 const ErrorHandler = require("../utils/errorHandler");
 
 module.exports = (err, req, res, next) => {
-    console.log("middleware/error.js before");
     err.statusCode = err.statusCode || 500;
     err.message = err.message || "Internal Server Error";
 
@@ -33,5 +32,4 @@ module.exports = (err, req, res, next) => {
         success: false,
         message: err.message,
     });
-    console.log("middleware/error.js after");
 }

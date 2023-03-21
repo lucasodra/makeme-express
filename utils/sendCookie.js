@@ -1,5 +1,4 @@
 const sendCookie = (user = {}, statusCode, res) => {
-    console.log("utils/sendCookie.js before");
     const token = user.generateToken();
 
     const options = {
@@ -13,8 +12,6 @@ const sendCookie = (user = {}, statusCode, res) => {
         success: true,
         user,
     });
-
-    console.log("utils/sendCookie.js after");
 }
 
 module.exports = sendCookie;
