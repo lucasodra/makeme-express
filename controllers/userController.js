@@ -4,6 +4,8 @@ const catchAsync = require('../middlewares/catchAsync');
 const sendCookie = require('../utils/sendCookie');
 const ErrorHandler = require('../utils/errorHandler');
 const crypto = require('crypto');
+const { collection } = require('../models/userModel');
+const { json } = require('express');
 
 exports.signupUser = catchAsync(async (req, res, next) => {
 
@@ -40,4 +42,26 @@ exports.signupUser = catchAsync(async (req, res, next) => {
     })
 
     sendCookie(newUser, 201, res);
+});
+
+
+exports.signinUser = catchAsync(async (req, res, next) =>  {
+    
+    const { email, password } = req.body;
+
+    const user = User.findOne({email : email}).select("+password");
+l
+    if (!user) {
+        return next (new ErrorHandler("user doesnt exist", 401));
+    }
+    
+    const passwordMatched = await user.comparePassword(password);
+
+    if (!passwordMatched) {
+        return next (new ErrorHandler("invalid password", 401));
+    }
+
+    console.log(email);
+
+    res.status("200").json("done");
 });
